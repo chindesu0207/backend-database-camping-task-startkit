@@ -52,10 +52,12 @@ UPDATE
 SET
     role = 'COACH'
 WHERE
-    email = 'lee2000@hexschooltest.io'
-    OR email = 'muscle@hexschooltest.io'
-    OR email = 'starplatinum@hexschooltest.io'
-    OR email = 'opacity0@hexschooltest.io'
+    email IN (
+        'lee2000@hexschooltest.io',
+        'muscle@hexschooltest.io',
+        'starplatinum@hexschooltest.io'
+        )
+
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
 DELETE
 FROM
@@ -443,7 +445,8 @@ INNER JOIN (
     INNER JOIN
         "SKILL"
     ON
-        "COACH_LINK_SKILL".skill_id = "SKILL".id) AS "SKILL" 
+        "COACH_LINK_SKILL".skill_id = "SKILL".id
+    ) AS "SKILL" 
 ON
     "SKILL".coach_id = "COACH".id
 WHERE
