@@ -59,11 +59,11 @@ VALUES (
 --         )
 
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
-DELETE
-FROM
-    "USER"
-WHERE
-    email = 'opacity0@hexschooltest.io'
+-- DELETE
+-- FROM
+--     "USER"
+-- WHERE
+--     email = 'opacity0@hexschooltest.io'
 
 -- 1-4 查詢：取得USER 資料表目前所有用戶數量（提示：使用count函式）
 SELECT COUNT(*) FROM "USER"
@@ -215,8 +215,8 @@ VALUES (
 --     user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')
 
 -- -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
--- INSERT INTO "SKILL" (name) VALUES ('空中瑜伽')
--- DELETE FROM "SKILL" WHERE name = '空中瑜伽'
+INSERT INTO "SKILL" (name) VALUES ('空中瑜伽')
+DELETE FROM "SKILL" WHERE name = '空中瑜伽'
 
 --  ████████  █████   █    █   █
 --    █ █   ██    █  █     █   █
