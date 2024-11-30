@@ -244,7 +244,7 @@ INSERT INTO
         meeting_url
     )
 VALUES (
-        (SELECT id FROM "USER" WHERE name = '李燕容'),
+        (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io'),
         (SELECT id FROM "SKILL" WHERE name = '重訓'),
         '重訓基礎課',
         '2024-11-25 14:00:00',
@@ -277,12 +277,12 @@ INSERT INTO
         status
     )
 VALUES (
-        ( SELECT id FROM "USER" WHERE name = '王小明'),
+        ( SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
         (
             SELECT id
             FROM "COURSE"
             WHERE
-                user_id = (SELECT id FROM "USER" WHERE name = '李燕容')
+                user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')
         ),
         '2024-11-24 16:00:00',
         '即將授課'
@@ -300,7 +300,7 @@ VALUES (
             SELECT id
             FROM "COURSE"
             WHERE
-                user_id = (SELECT id FROM "USER" WHERE name = '李燕容')
+                user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')
         ),
         '2024-11-24 16:00:00',
         '即將授課'
@@ -315,10 +315,10 @@ SET
     cancelled_at = '2024-11-24 17:00:00',
     status = '課程已取消'
 WHERE
-    user_id = (SELECT id FROM "USER" WHERE name = '王小明')
+    user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
     AND course_id = (
             SELECT id FROM "COURSE"
-            WHERE user_id = (SELECT id FROM "USER" WHERE name = '李燕容')
+            WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')
             )
 
 -- 5-3. 新增：`王小明`再次預約 `李燕容`   的課程，請在`COURSE_BOOKING`新增一筆資料：
@@ -333,12 +333,12 @@ INSERT INTO
         status
     )
 VALUES (
-        (SELECT id FROM "USER" WHERE name = '王小明'),
+        (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
         (
             SELECT id
             FROM "COURSE"
             WHERE
-                user_id = (SELECT id FROM "USER" WHERE name = '李燕容')
+                user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')
         ),
         '2024-11-24 17:10:25',
         '即將授課'
@@ -348,7 +348,7 @@ VALUES (
 SELECT *
 FROM "COURSE_BOOKING"
 WHERE
-    user_id = (SELECT id FROM "USER" WHERE name = '王小明')
+    user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
 
 -- 5-5. 修改：`王小明` 現在已經加入直播室了，請在`COURSE_BOOKING`更新該筆預約資料（請注意，不要更新到已經取消的紀錄）：
     -- 1. 請在該筆預約記錄他的加入直播室時間 `join_at` 設為2024-11-25 14:01:59
@@ -356,12 +356,13 @@ WHERE
 UPDATE
     "COURSE_BOOKING"
 SET
-    join_at = '2024-11-25 14:01:59'
+    join_at = '2024-11-25 14:01:59',
+    status = '上課中'
 WHERE
-    user_id = (SELECT id FROM "USER" WHERE name = '王小明')
+    user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
     AND course_id = (
             SELECT id FROM "COURSE"
-            WHERE user_id = (SELECT id FROM "USER" WHERE name = '李燕容')
+            WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')
             )
     AND cancelled_at IS NULL
 
@@ -372,7 +373,7 @@ SELECT
 FROM
     "CREDIT_PURCHASE"
 WHERE
-    user_id = (SELECT id FROM "USER" WHERE name = '王小明')
+    user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
 GROUP BY
     user_id
 -- 5-7. 查詢：計算用戶王小明的已使用堂數，顯示須包含以下欄位： user_id , total。 (需使用到 Count 函式與 Group By)
@@ -382,7 +383,7 @@ SELECT
 FROM
     "COURSE_BOOKING"
 WHERE
-    user_id = (SELECT id FROM "USER" WHERE name = '王小明')
+    user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
     AND join_at IS NOT NULL
 GROUP BY
     user_id
@@ -415,7 +416,7 @@ INNER JOIN (
 ON
     "COURSE_BOOKING".user_id = "CREDIT_PURCHASE".user_id
 WHERE
-    "CREDIT_PURCHASE".user_id = (SELECT id FROM "USER" WHERE name = '王小明')
+    "CREDIT_PURCHASE".user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
 GROUP BY
     "CREDIT_PURCHASE".user_id,
     "COURSE_BOOKING".used_credits
