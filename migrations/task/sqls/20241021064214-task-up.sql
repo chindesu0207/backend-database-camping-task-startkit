@@ -55,11 +55,9 @@ UPDATE
 SET
     role = 'COACH'
 WHERE
-    email IN (
-        'lee2000@hexschooltest.io',
-        'muscle@hexschooltest.io',
-        'starplatinum@hexschooltest.io'
-        )
+    email IN ('lee2000@hexschooltest.io',
+    'muscle@hexschooltest.io',
+    'starplatinum@hexschooltest.io')
 
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
 
