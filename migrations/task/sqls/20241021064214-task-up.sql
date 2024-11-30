@@ -205,7 +205,7 @@ UPDATE
 SET
     experience_years = 3
 WHERE
-    user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')
+    user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io');
 
 UPDATE
     "COACH"
